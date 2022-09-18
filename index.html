@@ -5,7 +5,12 @@
 	</head>
 	<body>
 		<table id="board"></table>
-		<table id="reference"></table>
+		<table id="reference">
+			<thead>
+				<tr id="ref-head"><td></td></tr>
+			</thead>
+			<tbody id="ref-body"></tbody>
+		</table>
 
 		<script type="text/javascript" src="board.js"></script>
 		<script type="text/javascript" src="reference.js"></script>
@@ -13,13 +18,28 @@
 			var board = build_board(5, 4);
 			populate_board(board, 3);
 
-			var reference = build_reference(board);
+			var reference = build_reference(board, 3);
+			var relation = build_relation(board, reference);
 
 			// Build our reference
-			var reference_element = document.getElementById("reference");
+			//var reference_element = document.getElementById("reference");
+			var reference_element_head = document.getElementById("ref-head");
+			var reference_element_body = document.getElementById("ref-body");
+
+			for (var col of reference.values().next().value) {
+				var ref_header = document.createElement("td");
+				ref_header.innerHTML = col[0] + 1;
+				reference_element_head.appendChild(ref_header);
+			}
+
 			for (var [row, cols] of reference.entries()) {
 				var row_element = document.createElement("tr");
-				reference_element.appendChild(row_element);
+				reference_element_body.appendChild(row_element);
+
+				var col_header = document.createElement("td");
+				col_header.innerHTML = row;
+				row_element.appendChild(col_header);
+
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
@@ -38,6 +58,8 @@
 					row_element.appendChild(col_element);
 					col_element.className = "tile";
 					col_element.innerHTML = val == -1 ? "*" : val;
+					var rel = relation.get(row).get(col);
+					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ")";
 				}
 			}
 		</script>
