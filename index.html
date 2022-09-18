@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="board.js"></script>
 		<script type="text/javascript" src="reference.js"></script>
 		<script type="text/javascript">
-			var board = build_board(5, 4);
+			var board = build_board(7, 8);
 			populate_board(board, 3);
 
 			var reference = build_reference(board, 3);
@@ -43,7 +43,6 @@
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
-					col_element.className = "ref";
 					col_element.innerHTML = val == -1 ? "*" : val;
 				}
 			}
@@ -56,7 +55,6 @@
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
-					col_element.className = "tile";
 					col_element.innerHTML = val == -1 ? "*" : val;
 					var rel = relation.get(row).get(col);
 					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ")";

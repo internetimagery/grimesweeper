@@ -1,9 +1,9 @@
-.tile {
+#board td {
 	padding: 10px;
 	border: solid black 1px;
 }
 
-.ref {
+#reference tbody td {
 	padding: 5px;
 	border: dotted grey 1px;
 }

@@ -7,16 +7,18 @@ function build_reference(board, rows) {
 	// First get all real values we need from the board.
 	// So we can be sure they have a reference.
 	var vals = new Set();
+	var board_size = 0;
 	for (var [row, cols] of board.entries()) {
 		for (var [col, val] of cols.entries()) {
 			vals.add(val);
+			++board_size;
 		}
 	}
 
 	// Take all our values. Then add a bunch more to break things
 	// up and make the connections less obvious.
 	var entries = Array.from(vals);
-	var quad_entries = 4 * entries.length;
+	var quad_entries = 1.2 * board_size;
 	var total_entries = quad_entries - quad_entries % 3;
 	for (var i = vals.size; i < total_entries; ++i) {
 		var j = vals.size * Math.random() << 0;
