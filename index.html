@@ -28,6 +28,7 @@
 
 			for (var col of reference.values().next().value) {
 				var ref_header = document.createElement("td");
+				ref_header.className = "ref_heading";
 				ref_header.innerHTML = col[0] + 1;
 				reference_element_head.appendChild(ref_header);
 			}
@@ -38,11 +39,13 @@
 
 				var col_header = document.createElement("td");
 				col_header.innerHTML = row;
+				col_header.className = "ref_heading";
 				row_element.appendChild(col_header);
 
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
+					col_element.className = "ref_item";
 					col_element.innerHTML = val == -1 ? "*" : val;
 				}
 			}
@@ -55,6 +58,7 @@
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
+					col_element.className = "board_item";
 					col_element.innerHTML = val == -1 ? "*" : val;
 					var rel = relation.get(row).get(col);
 					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ")";

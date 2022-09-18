@@ -1,9 +1,9 @@
-#board td {
+#board .board_item {
 	padding: 10px;
 	border: solid black 1px;
 }
 
-#reference tbody td {
+#reference .ref_item {
 	padding: 5px;
 	border: dotted grey 1px;
 }
