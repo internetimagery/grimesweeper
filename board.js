@@ -14,7 +14,7 @@ function build_board(width, height) {
 
 function populate_board(board, num_bombs) {
 	// Get all keys from the board so we can pick some to be bombs
-	var keys = [];
+	var keys = new Array();
 	for (var [row, cols] of board.entries()) {
 		for (var [col, val] of cols.entries()) {
 			keys.push([row, col]);
@@ -23,19 +23,19 @@ function populate_board(board, num_bombs) {
 	num_bombs = keys.length > num_bombs ? num_bombs : keys.length;
 
 	// Pick our bombs...
-	var bombs = [];
+	var bombs = new Set();
 	for (var i = 0; i < num_bombs; ++i) {
 		while (true) {
 			var bomb_index = keys.length * Math.random() << 0;
-			if (!(bomb_index in bombs)) {
-				bombs.push(bomb_index);
+			if (!bombs.has(bomb_index)) {
+				bombs.add(bomb_index);
 				break
 			}
 		}
 	}
 
 	// Place our bombs..
-	for (var bomb_index of bombs) {
+	for (var bomb_index of bombs.values()) {
 		var bomb = keys[bomb_index];
 		board.get(bomb[0]).set(bomb[1], -1);
 	}

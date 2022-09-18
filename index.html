@@ -1,14 +1,34 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
 	<body>
 		<table id="board"></table>
+		<table id="reference"></table>
 
 		<script type="text/javascript" src="board.js"></script>
+		<script type="text/javascript" src="reference.js"></script>
 		<script type="text/javascript">
 			var board = build_board(5, 4);
 			populate_board(board, 3);
-			console.log(board);
 
+			var reference = build_reference(board);
+
+			// Build our reference
+			var reference_element = document.getElementById("reference");
+			for (var [row, cols] of reference.entries()) {
+				var row_element = document.createElement("tr");
+				reference_element.appendChild(row_element);
+				for (var [col, val] of cols.entries()) {
+					var col_element = document.createElement("td");
+					row_element.appendChild(col_element);
+					col_element.className = "ref";
+					col_element.innerHTML = val == -1 ? "*" : val;
+				}
+			}
+
+			// Build our board
 			var board_element = document.getElementById("board");
 			for (var [row, cols] of board.entries()) {
 				var row_element = document.createElement("tr");
@@ -16,7 +36,8 @@
 				for (var [col, val] of cols.entries()) {
 					var col_element = document.createElement("td");
 					row_element.appendChild(col_element);
-					col_element.innerHTML = val == -1 ? "!" : val;
+					col_element.className = "tile";
+					col_element.innerHTML = val == -1 ? "*" : val;
 				}
 			}
 		</script>

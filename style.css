@@ -1,0 +1,9 @@
+.tile {
+	padding: 10px;
+	border: solid black 1px;
+}
+
+.ref {
+	padding: 5px;
+	border: dotted grey 1px;
+}
