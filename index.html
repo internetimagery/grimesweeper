@@ -15,7 +15,7 @@
 		<script type="text/javascript" src="board.js"></script>
 		<script type="text/javascript" src="reference.js"></script>
 		<script type="text/javascript">
-			var board = build_board(7, 8);
+			var board = build_board(5, 5);
 			populate_board(board, 3);
 
 			var reference = build_reference(board, 3);
@@ -61,7 +61,7 @@
 					col_element.className = "board_item";
 					col_element.innerHTML = val == -1 ? "*" : val;
 					var rel = relation.get(row).get(col);
-					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ")";
+					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ":" + rel[2] + ")";
 				}
 			}
 		</script>

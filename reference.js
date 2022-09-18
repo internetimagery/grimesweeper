@@ -49,24 +49,40 @@ function build_reference(board, rows) {
 function build_relation(board, reference) {
 	// Build relationship between board and reference
 	var reference_vals = new Map();
+	var reference_keys = new Array();
 	for (var [row, cols] of reference.entries()) {
 		for (var [col, val] of cols.entries()) {
+			// reference_vals holds indexes to the reference_keys, pointing to values.
+			// reference_keys holds positions pointing to the reference chart position.
 			if (reference_vals.has(val)) {
-				reference_vals.get(val).push([row, col]);
+				reference_vals.get(val).push(reference_keys.length);
 			} else {
-				reference_vals.set(val, new Array([row, col]));
+				reference_vals.set(val, [reference_keys.length]);
 			}
+			var key = new Array(row, col);
+			reference_keys.push(key);
 		}
 	}
 
+	// Build relationship between board items and reference items
 	var relation = new Map();
 	for (var [row, cols] of board.entries()) {
 		var relation_cols = new Map();
 		relation.set(row, relation_cols);
 		for (var [col, val] of cols.entries()) {
+			// Pick from one of the repeated values in the reference chart
 			var options = reference_vals.get(val);
 			var opt = options[options.length * Math.random() << 0];
-			relation_cols.set(col, opt);
+
+			// Backtrack the reference items to get our third number.
+			// Clamp to reasonable number so people don't have to count too many numbers.
+			var backtrack_num = Math.min(8, opt) * Math.random() << 0;
+
+			var pos = reference_keys[opt - backtrack_num];
+			console.log(opt);
+			console.log(backtrack_num);
+			console.log(pos);
+			relation_cols.set(col, [pos[0], pos[1], backtrack_num]);
 		}
 	}
 	return relation;
