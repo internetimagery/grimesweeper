@@ -1,19 +1,27 @@
+body {
+	font-family: Arial, sans-serif;
+}
 
-.board td {
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#board td {
 	width: 60px;
 	text-align: right;
 	vertical-align: bottom;
+	background-color: #a4bfcc;
+	border: 1px solid lightgrey;
+	box-shadow: 2px 2px 2px 1px #fffaee inset, -1px -1px 1px 1px #655671 inset;
+	padding: 5px;
 }
 
-.board .board_item {
-	border: solid black 1px;
+#reference {
+	margin-top: 20px;
 }
 
-.reference {
-	margin: 20px;
-}
-
-.reference .ref_item {
+#reference .ref_item {
 	padding: 5px;
 	border: dotted grey 1px;
 }
@@ -23,7 +31,22 @@
 	right: 0px;
 	bottom: 0px;
 	padding: 30px;
-	border-radius-top-left: 30px;
+	border-top-left-radius: 10px;
 	border: solid black 1px;
 	background: lightgrey;
+}
+
+#heading { 
+	display: none;
+	padding: 5px;
+	text-align: center;
+}
+
+@media print {
+	#control_panel { display: none; }
+	#heading { display: block; }
+	#board td {
+		box-shadow: none; 
+		background-color: none;
+	}
 }

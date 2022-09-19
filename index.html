@@ -4,8 +4,9 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<table id="board" class="board"></table>
-		<table id="reference" class="reference">
+		<div id="heading" class="center"></div>
+		<table id="board" class="center"></table>
+		<table id="reference" class="center">
 			<thead>
 				<tr id="ref-head"><td></td></tr>
 			</thead>
@@ -22,6 +23,8 @@
 		<script type="text/javascript" src="board.js"></script>
 		<script type="text/javascript" src="reference.js"></script>
 		<script type="text/javascript">
+			var heading = document.getElementById("heading");
+
 			var widthInput = document.getElementById("input_width");
 			var heightInput = document.getElementById("input_height");
 			var bombsInput = document.getElementById("input_bombs");
@@ -83,6 +86,8 @@
 						col_element.innerHTML = "</br></br>" + (rel[1] + 1) + ":" + rel[0] + ":" + rel[2];
 					}
 				}
+
+				heading.innerHTML = `There are ${bombs} bombs to find!`;
 
 			}
 
