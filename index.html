@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="normalize.css" />
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
@@ -13,11 +14,23 @@
 			<tbody id="ref-body"></tbody>
 		</table>
 		<div id="control_panel">
-			<form>
-				<input id="input_width"  type="number" step="1" min="1" value="5"> Width</input></br>
-				<input id="input_height" type="number" step="1" min="1" value="5"> Height</input></br>
-				<input id="input_bombs"  type="number" step="1" min="1" value="2"> Bombs</input>
-			</form>
+			<table>
+				<tr>
+					<td>
+						<img width="150" src="sweep.png"/>
+					</td>
+					<td>
+				<form>
+					<input id="input_width"  type="number" step="1" min="1" value="7"> Width</input></br>
+					<input id="input_height" type="number" step="1" min="1" value="5"> Height</input></br>
+					<input id="input_bombs"  type="number" step="1" min="1" value="9"> Messes</input>
+				</form>
+					</td>
+				</tr>
+			</table>
+			<span style="font-size: 8px;">
+				<a href="https://www.freepik.com/free-vector/kids-cleaning-cartoon-icons-set_5921727.htm#query=broom%20icon&position=8&from_view=keyword">Image by macrovector</a> on Freepik
+			</style>
 		</div>
 
 		<script type="text/javascript" src="board.js"></script>
@@ -68,7 +81,11 @@
 						var col_element = document.createElement("td");
 						row_element.appendChild(col_element);
 						col_element.className = "ref_item";
-						col_element.innerHTML = val == -1 ? "*" : val;
+						if (val == -1) {
+							col_element.innerHTML = "🟐";
+						} else {
+							col_element.innerHTML = val;
+						}
 					}
 				}
 
@@ -78,16 +95,18 @@
 					var row_element = document.createElement("tr");
 					board_element.appendChild(row_element);
 					for (var [col, val] of cols.entries()) {
+						var rot = 4 * Math.random() - 2;
 						var col_element = document.createElement("td");
 						row_element.appendChild(col_element);
 						col_element.className = "board_item";
+						col_element.style.transform = `rotate(${rot}deg)`;
 						//col_element.innerHTML = val == -1 ? "*" : val;
 						var rel = relation.get(row).get(col);
-						col_element.innerHTML = "</br></br>" + (rel[1] + 1) + ":" + rel[0] + ":" + rel[2];
+						col_element.innerHTML = `</br></br>${rel[1]+1}:${rel[0]}:${rel[2]}`;
 					}
 				}
 
-				heading.innerHTML = `There are ${bombs} bombs to find!`;
+				heading.innerHTML = `There are ${bombs} messes to tidy up!`;
 
 			}
 
