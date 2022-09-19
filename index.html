@@ -4,66 +4,93 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body>
-		<table id="board"></table>
-		<table id="reference">
+		<table id="board" class="board"></table>
+		<table id="reference" class="reference">
 			<thead>
 				<tr id="ref-head"><td></td></tr>
 			</thead>
 			<tbody id="ref-body"></tbody>
 		</table>
+		<div id="control_panel">
+			<form>
+				<input id="input_width"  type="number" step="1" min="1" value="5"> Width</input></br>
+				<input id="input_height" type="number" step="1" min="1" value="5"> Height</input></br>
+				<input id="input_bombs"  type="number" step="1" min="1" value="2"> Bombs</input>
+			</form>
+		</div>
 
 		<script type="text/javascript" src="board.js"></script>
 		<script type="text/javascript" src="reference.js"></script>
 		<script type="text/javascript">
-			var board = build_board(5, 5);
-			populate_board(board, 3);
+			var widthInput = document.getElementById("input_width");
+			var heightInput = document.getElementById("input_height");
+			var bombsInput = document.getElementById("input_bombs");
 
-			var reference = build_reference(board, 3);
-			var relation = build_relation(board, reference);
-
-			// Build our reference
-			//var reference_element = document.getElementById("reference");
+			var board_element = document.getElementById("board");
 			var reference_element_head = document.getElementById("ref-head");
 			var reference_element_body = document.getElementById("ref-body");
 
-			for (var col of reference.values().next().value) {
-				var ref_header = document.createElement("td");
-				ref_header.className = "ref_heading";
-				ref_header.innerHTML = col[0] + 1;
-				reference_element_head.appendChild(ref_header);
-			}
+			function update(_) {
+				var width = parseInt(widthInput.value, 10);
+				var height = parseInt(heightInput.value, 10);
+				var bombs = parseInt(bombsInput.value, 10);
 
-			for (var [row, cols] of reference.entries()) {
-				var row_element = document.createElement("tr");
-				reference_element_body.appendChild(row_element);
+				var board = build_board(height, width);
+				populate_board(board, bombs);
 
-				var col_header = document.createElement("td");
-				col_header.innerHTML = row;
-				col_header.className = "ref_heading";
-				row_element.appendChild(col_header);
+				var reference = build_reference(board, 3);
+				var relation = build_relation(board, reference);
 
-				for (var [col, val] of cols.entries()) {
-					var col_element = document.createElement("td");
-					row_element.appendChild(col_element);
-					col_element.className = "ref_item";
-					col_element.innerHTML = val == -1 ? "*" : val;
+				reference_element_head.innerHTML = "<td></td>";
+				reference_element_body.innerHTML = "";
+
+				// Build our reference
+				for (var col of reference.values().next().value) {
+					var ref_header = document.createElement("td");
+					ref_header.className = "ref_heading";
+					ref_header.innerHTML = col[0] + 1;
+					reference_element_head.appendChild(ref_header);
 				}
+
+				for (var [row, cols] of reference.entries()) {
+					var row_element = document.createElement("tr");
+					reference_element_body.appendChild(row_element);
+
+					var col_header = document.createElement("td");
+					col_header.innerHTML = row;
+					col_header.className = "ref_heading";
+					row_element.appendChild(col_header);
+
+					for (var [col, val] of cols.entries()) {
+						var col_element = document.createElement("td");
+						row_element.appendChild(col_element);
+						col_element.className = "ref_item";
+						col_element.innerHTML = val == -1 ? "*" : val;
+					}
+				}
+
+				// Build board
+				board_element.innerHTML = "";
+				for (var [row, cols] of board.entries()) {
+					var row_element = document.createElement("tr");
+					board_element.appendChild(row_element);
+					for (var [col, val] of cols.entries()) {
+						var col_element = document.createElement("td");
+						row_element.appendChild(col_element);
+						col_element.className = "board_item";
+						//col_element.innerHTML = val == -1 ? "*" : val;
+						var rel = relation.get(row).get(col);
+						col_element.innerHTML = "</br></br>" + (rel[1] + 1) + ":" + rel[0] + ":" + rel[2];
+					}
+				}
+
 			}
 
-			// Build our board
-			var board_element = document.getElementById("board");
-			for (var [row, cols] of board.entries()) {
-				var row_element = document.createElement("tr");
-				board_element.appendChild(row_element);
-				for (var [col, val] of cols.entries()) {
-					var col_element = document.createElement("td");
-					row_element.appendChild(col_element);
-					col_element.className = "board_item";
-					col_element.innerHTML = val == -1 ? "*" : val;
-					var rel = relation.get(row).get(col);
-					col_element.innerHTML += " (" + (rel[1] + 1) + ":" + rel[0] + ":" + rel[2] + ")";
-				}
-			}
+			widthInput.onchange = update;
+			heightInput.onchange = update;
+			bombsInput.onchange = update;
+			// Perform initial update
+			update();
 		</script>
 	</body>
 </html>

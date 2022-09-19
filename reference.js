@@ -79,9 +79,6 @@ function build_relation(board, reference) {
 			var backtrack_num = Math.min(8, opt) * Math.random() << 0;
 
 			var pos = reference_keys[opt - backtrack_num];
-			console.log(opt);
-			console.log(backtrack_num);
-			console.log(pos);
 			relation_cols.set(col, [pos[0], pos[1], backtrack_num]);
 		}
 	}

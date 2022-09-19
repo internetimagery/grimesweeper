@@ -1,9 +1,29 @@
-#board .board_item {
-	padding: 10px;
+
+.board td {
+	width: 60px;
+	text-align: right;
+	vertical-align: bottom;
+}
+
+.board .board_item {
 	border: solid black 1px;
 }
 
-#reference .ref_item {
+.reference {
+	margin: 20px;
+}
+
+.reference .ref_item {
 	padding: 5px;
 	border: dotted grey 1px;
+}
+
+#control_panel {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	padding: 30px;
+	border-radius-top-left: 30px;
+	border: solid black 1px;
+	background: lightgrey;
 }
