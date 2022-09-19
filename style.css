@@ -1,12 +1,27 @@
+@font-face { 
+	font-family: "RubikMoonrocks";  
+	src: url("fonts/RubikMoonrocks-Regular.ttf");
+}
+
 body {
 	font-family: Arial, sans-serif;
 	background-image: url("splotch.svg"), url("checkerboard-cross.webp");
 	background-repeat: no-repeat, repeat;
 }
 
+h1 {
+	font-size: 4em;
+}
+
+.grime {
+	font-family: Arial, sans-serif;
+	font-family: RubikMoonrocks;
+}
+
 .center {
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
 }
 
 .splotch {
