@@ -1,11 +1,11 @@
 @font-face { 
 	font-family: "RubikMoonrocks";  
-	src: url("fonts/RubikMoonrocks-Regular.ttf");
+	src: url("../fonts/RubikMoonrocks-Regular.ttf");
 }
 
 body {
 	font-family: Arial, sans-serif;
-	background-image: url("splotch.svg"), url("checkerboard-cross.webp");
+	background-image: url("../images/splotch.svg"), url("../images/checkerboard-cross.webp");
 	background-repeat: no-repeat, repeat;
 }
 
