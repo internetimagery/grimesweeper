@@ -13,6 +13,10 @@ h1 {
 	font-size: 4em;
 }
 
+.to_print {
+	display: none;
+}
+
 .grime {
 	font-family: Arial, sans-serif;
 	font-family: RubikMoonrocks;
@@ -64,14 +68,13 @@ h1 {
 }
 
 #heading { 
-	display: none;
 	padding: 5px;
 	text-align: center;
 }
 
 @media print {
-	#control_panel { display: none; }
-	#heading { display: block; }
+	.to_print { display: block; }
+	.no_print { display: none; }
 	#board td {
 		box-shadow: none; 
 		background-color: none;

@@ -6,7 +6,8 @@
 	</head>
 	<body>
 		<h1 id="title" class="center grime">Grime Sweeper</h1>
-		<div id="heading" class="center"></div>
+		<div id="heading" class="center to_print"></div>
+		<p id="checks" class="center to_print"></p>
 		<table id="board" class="center"></table>
 		<table id="reference" class="center">
 			<thead>
@@ -14,7 +15,7 @@
 			</thead>
 			<tbody id="ref-body"></tbody>
 		</table>
-		<div id="control_panel">
+		<div id="control_panel" class="no_print">
 			<p class="grime center">Choose your floor size!</p>
 			<table>
 				<tr>
@@ -39,6 +40,7 @@
 		<script type="text/javascript" src="scripts/reference.js"></script>
 		<script type="text/javascript">
 			var heading = document.getElementById("heading");
+			var checks = document.getElementById("checks");
 
 			var widthInput = document.getElementById("input_width");
 			var heightInput = document.getElementById("input_height");
@@ -109,6 +111,7 @@
 				}
 
 				heading.innerHTML = `There are ${bombs} messes to tidy up!`;
+				checks.innerHTML = "⬚".repeat(bombs);
 
 			}
 
