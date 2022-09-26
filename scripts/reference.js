@@ -76,7 +76,7 @@ function build_relation(board, reference) {
 
 			// Backtrack the reference items to get our third number.
 			// Clamp to reasonable number so people don't have to count too many numbers.
-			var backtrack_num = Math.min(8, opt) * Math.random() << 0;
+			var backtrack_num = Math.min(6, opt) * Math.random() << 0;
 
 			var pos = reference_keys[opt - backtrack_num];
 			relation_cols.set(col, [pos[0], pos[1], backtrack_num]);
