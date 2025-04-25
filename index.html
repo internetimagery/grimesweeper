@@ -5,7 +5,8 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css" />
 	</head>
 	<body>
-		<h1 id="title" class="center grime">Grime Sweeper</h1>
+		<h1 id="title" class="center grime no_print">Grime Sweeper</h1>
+		<h2 id="title" class="center grime to_print">Grime Sweeper</h2>
 		<div id="heading" class="center to_print"></div>
 		<p id="checks" class="center to_print"></p>
 		<table id="board" class="center"></table>
@@ -24,9 +25,25 @@
 					</td>
 					<td>
 				<form>
-					<input id="input_width"  type="number" step="1" min="1" value="7"> Width</input></br>
-					<input id="input_height" type="number" step="1" min="1" value="5"> Height</input></br>
-					<input id="input_bombs"  type="number" step="1" min="1" value="9"> Messes</input>
+					<table>
+						<tr>
+							<td><input id="input_width"  type="number" step="1" min="1" value="7"></input></td>
+							<td><label for="input_width">Width</label></td>
+						</tr>
+						<tr>
+							<td><input id="input_height" type="number" step="1" min="1" value="5"></input></td>
+							<td><label for="input_height">Height</label></td>
+						</tr>
+						<tr>
+							<td><select id="input_difficulty">
+								<option value="10">Easy</option>
+								<option value="20" selected=true>Normal</option>
+								<option value="30">Hard</option>
+							</select></td>
+							<td><label for="input_difficulty">Difficulty</label></td>
+						</tr>
+
+					</table>
 				</form>
 					</td>
 				</tr>
@@ -39,27 +56,30 @@
 		<script type="text/javascript" src="scripts/board.js"></script>
 		<script type="text/javascript" src="scripts/reference.js"></script>
 		<script type="text/javascript">
-			var heading = document.getElementById("heading");
-			var checks = document.getElementById("checks");
+			const heading = document.getElementById("heading");
+			const checks = document.getElementById("checks");
 
-			var widthInput = document.getElementById("input_width");
-			var heightInput = document.getElementById("input_height");
-			var bombsInput = document.getElementById("input_bombs");
+			const width_input = document.getElementById("input_width");
+			const height_input = document.getElementById("input_height");
+			const difficulty_input = document.getElementById("input_difficulty");
 
-			var board_element = document.getElementById("board");
-			var reference_element_head = document.getElementById("ref-head");
-			var reference_element_body = document.getElementById("ref-body");
+			const board_element = document.getElementById("board");
+			const reference_element_head = document.getElementById("ref-head");
+			const reference_element_body = document.getElementById("ref-body");
 
 			function update(_) {
-				var width = parseInt(widthInput.value, 10);
-				var height = parseInt(heightInput.value, 10);
-				var bombs = parseInt(bombsInput.value, 10);
+				const width = parseInt(width_input.value, 10);
+				const height = parseInt(height_input.value, 10);
+				const board_size = width * height;
+				const bomb_ratio = parseInt(difficulty_input.value, 10);
+				const bombs = Math.round(0.01 * bomb_ratio * board_size);
+				console.log(`Bombs: ${bombs}`);
 
-				var board = build_board(height, width);
+				const board = build_board(height, width);
 				populate_board(board, bombs);
 
-				var reference = build_reference(board, 3);
-				var relation = build_relation(board, reference);
+				const reference = build_reference(board, 3);
+				const relation = build_relation(board, reference);
 
 				reference_element_head.innerHTML = "<td></td>";
 				reference_element_body.innerHTML = "";
@@ -115,9 +135,9 @@
 
 			}
 
-			widthInput.onchange = update;
-			heightInput.onchange = update;
-			bombsInput.onchange = update;
+			width_input.onchange = update;
+			height_input.onchange = update;
+			difficulty_input.onchange = update;
 			// Perform initial update
 			update();
 		</script>

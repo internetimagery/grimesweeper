@@ -4,6 +4,10 @@ function build_reference(board, rows) {
 	// Build out our reference structure
 	// bigger than the initial board.
 
+	if (rows < 1 || rows > 25) {
+		throw "Invalid row count";
+	}
+
 	// First get all real values we need from the board.
 	// So we can be sure they have a reference.
 	var vals = new Set();
@@ -26,9 +30,6 @@ function build_reference(board, rows) {
 	}
 	shuffleArray(entries);
 
-	if (rows < 1 || rows > 25) {
-		throw "Invalid row count";
-	}
 	var reference = new Map();
 	var col_num = entries.length / 3;
 	var col_index = 0;
