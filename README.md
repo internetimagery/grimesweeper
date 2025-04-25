@@ -27,4 +27,4 @@ Example:
 * This puts us into a cell with a `1`. This is our final number. Write the number in the cell. This means there is one mess touching this square (possible on diagnonal).
 * Pick a new square and repeat the process.
 
-![Instruction diagram](instruction.jpg)
+![Instruction diagram](images/instruction.jpg)
